@@ -10,6 +10,11 @@ module.exports = cds.service.impl(async function(srv){
         .execute({
             destinationName: "S4HANA"
           });
+        //   {
+        //     "url": "http://103.207.171.202:8021/",
+        //     "username": "",
+        //      "password": ""
+        //   }
         console.log(salesorders)  ;
         return salesorders;
     };
