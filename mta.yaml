@@ -1,0 +1,56 @@
+---
+_schema-version: '3.1'
+ID: newcap
+version: 1.0.0
+description: "A simple CAP project."
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npx -p @sap/cds-dk cds build --production
+modules:
+  - name: newcap-srv
+    type: nodejs
+    path: gen/srv
+    requires:
+      - name: newcap-uaa
+      - name: newcap-dest    
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm-ci
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+
+  # --------------------- SERVER MODULE ------------------------
+  - name: newcap-ui
+  # ------------------------------------------------------------
+    type: nodejs
+    path: app
+    requires:
+      # Resources extracted from CAP configuration
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api
+          strictSSL: true
+          forwardAuthToken: true
+          url: '~{srv-url}'    
+      - name: newcap-uaa
+      - name: newcap-dest
+resources:
+ - name: newcap-dest
+   type: org.cloudfoundry.existing-service
+   parameters:
+     service-name: newcap-dest
+
+ - name: newcap-uaa
+   type: org.cloudfoundry.managed-service
+   parameters:
+     path: ./xs-security.json
+     service: xsuaa
+     service-plan: application     

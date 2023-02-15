@@ -1,0 +1,20 @@
+{
+    "welcomeFile": "uiapp/webapp/",
+    "authenticationMethod": "route",
+    "routes":
+    [
+    { 
+        "source": "^/uiapp/webapp/(.*)$", 
+        "target": "$1",
+        "csrfProtection": false,
+        "authenticationType": "xsuaa",
+        "localDir": "anubhavfioriapp/webapp/" 
+      }, 
+      { 
+        "source": "^/(.*)", 
+        "csrfProtection": false,
+        "authenticationType": "xsuaa",
+        "destination": "srv-api" 
+      } 
+    ]
+    }

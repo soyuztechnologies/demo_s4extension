@@ -1,0 +1,13 @@
+<mvc:View controllerName="uiapp.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <List id="idList" items="{/MySalesOrder}">
+                <items>
+                    <DisplayListItem label="{SoldToParty}"></DisplayListItem>
+                </items>
+            </List>
+        </content>
+    </Page>
+</mvc:View>

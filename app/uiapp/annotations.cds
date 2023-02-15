@@ -1,0 +1,1 @@
+using newcap.srv.CatalogService as service from '../../srv/CatalogService';
