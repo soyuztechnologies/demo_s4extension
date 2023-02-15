@@ -1,14 +1,14 @@
 const cds = require('@sap/cds');
 
 module.exports = cds.service.impl(async function(srv){
-    const { MySalesOrder } = cds.entities;
+    const { MySalesOrder } = this.entities;
     
     var getAllSalesOrders= async function (){
         const { salesOrderService } = require('./sales-order-api/sales-order-service');
         const { salesOrderApi } =  salesOrderService();
         const salesorders = await salesOrderApi.requestBuilder().getAll().top(5)
         .execute({
-            "destination": "S4HANA"
+            destinationName: "S4HANA"
           });
         console.log(salesorders)  ;
         return salesorders;

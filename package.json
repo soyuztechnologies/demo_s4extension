@@ -6,9 +6,13 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@sap-cloud-sdk/odata-v2": "^2.14.0",
     "@sap/cds": "^6",
     "@sap/cds-odata-v2-adapter-proxy": "^1.9.19",
-    "express": "^4"
+    "@sap/xsenv": "^3.4.0",
+    "@sap/xssec": "^3.2.17",
+    "express": "^4",
+    "passport": "^0.6.0"
   },
   "devDependencies": {
     "@sap-cloud-sdk/generator": "^2.14.0",
